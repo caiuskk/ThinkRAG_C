@@ -87,10 +87,10 @@ class IndexManager:
             input_dir=input_dir, recursive=True
         ).load_data()
         if len(documents) > 0:
-            # TODO: improve ingestion pipeline to achieve graph searching
+            # TODO: improve ingestion pipeline to achieve graph searching; overall file ingestion is less optimized
             pipeline = AdvancedIngestionPipeline()
             nodes = pipeline.run(documents=documents)
-            index = self.insert_nodes(nodes)
+            _ = self.insert_nodes(nodes)
             return nodes
         else:
             print("No documents found")
@@ -107,7 +107,7 @@ class IndexManager:
         if len(documents) > 0:
             pipeline = AdvancedIngestionPipeline()
             nodes = pipeline.run(documents=documents)
-            index = self.insert_nodes(nodes)
+            _ = self.insert_nodes(nodes)
             return nodes
         else:
             print("No documents found")
@@ -115,6 +115,7 @@ class IndexManager:
 
     # Get URL and create index
     # https://docs.llamaindex.ai/en/stable/examples/data_connectors/WebPageDemo/
+    # TODO： Could be interesting module for further knowmain konwledghe collection
     def load_websites(self, websites, chunk_size, chunk_overlap):
         Settings.chunk_size = chunk_size
         Settings.chunk_overlap = chunk_overlap
